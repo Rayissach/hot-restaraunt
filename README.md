@@ -1,1 +1,1 @@
-# hot-resteraunt
+# hot-restaurant
