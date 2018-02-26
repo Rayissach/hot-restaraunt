@@ -48,11 +48,32 @@ app.post('/api/add', function(req, res) {
 
   newTable.routeName = newTable.name.replace(/\s+/g, '').toLowerCase();
 
-  console.log(newTable);
+  //   console.log(newTable);
 
   reservations.push(newTable);
 
   res.json(newTable);
+  app.get('/', function(request, response) {
+    response.sendfile('index.html');
+  });
+
+  if (newTable.length <= 5) {
+    for (var i = 0; i < reservations.length; i++) {
+      if (table === reservations[i].routeName) {
+        return res.json(reservations[i]);
+      }
+    }
+  } else {
+    var waitTable = req.params.waitList;
+
+    for (var i = 0; i < waitList.length; i++) {
+      if (waitTable === waitList[i].routeName) {
+        return res.json(waitList[i]);
+      }
+    }
+
+    return res.json(false);
+  }
 });
 
 // Starts the server to begin listening
